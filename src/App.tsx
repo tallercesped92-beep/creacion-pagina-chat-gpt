@@ -57,7 +57,6 @@ export default function App() {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const [isCheckingAuth, setIsCheckingAuth] = useState<boolean>(true);
 
-  // Monitor location changes (back/forward button, pushState, hash changes)
   useEffect(() => {
     const handleLocationChange = () => {
       const path = window.location.pathname;
@@ -97,7 +96,6 @@ export default function App() {
     };
   }, []);
 
-  // Update page title dynamically
   useEffect(() => {
     const titles: Record<string, string> = {
       "/": "CÉSPEDES AUTOMOTRIZ | Personal Car Shopper · Importación Alemania",
@@ -116,7 +114,6 @@ export default function App() {
     document.title = titles[currentPath] || titles["/"];
   }, [currentPath]);
 
-  // Monitor Supabase Authentication session for /leads
   useEffect(() => {
     if (!isSupabaseConfigured || !supabase) {
       setIsAuthenticated(false);
@@ -141,12 +138,10 @@ export default function App() {
     };
   }, []);
 
-  // Router navigation helper
   const navigateTo = useCallback((route: string) => {
     try {
       window.history.pushState({}, "", route);
     } catch {
-      // Fallback for sandboxed iframes
       window.location.hash = route.replace("/", "#");
     }
     setCurrentPath(route);
@@ -176,7 +171,6 @@ export default function App() {
     setIsAuthenticated(true);
   }, []);
 
-  // 1. Privado: /leads
   if (currentPath === "/leads") {
     if (isCheckingAuth) {
       return (
@@ -208,7 +202,6 @@ export default function App() {
     );
   }
 
-  // Helper to determine legal subpage type
   const legalType: LegalDocType =
     currentPath === "/aviso-legal"
       ? "legal"
@@ -218,10 +211,8 @@ export default function App() {
 
   return (
     <div className="min-h-screen flex flex-col bg-[#0A0A0A] text-white antialiased selection:bg-[#C8102E] selection:text-white">
-      {/* Scroll Progress Bar */}
       <ScrollProgressBar />
 
-      {/* Header with full multi-page navigation */}
       <Header
         currentRoute={currentPath}
         onNavigate={navigateTo}
@@ -229,37 +220,30 @@ export default function App() {
       />
 
       <main className="flex-grow">
-        {/* Route: /servicio */}
         {currentPath === "/servicio" && (
           <ServicePage onCtaClick={handleScrollToForm} />
         )}
 
-        {/* Route: /proceso */}
         {currentPath === "/proceso" && (
           <ProcessPage onCtaClick={handleScrollToForm} />
         )}
 
-        {/* Route: /importacion */}
         {currentPath === "/importacion" && (
           <ImportPage onCtaClick={handleScrollToForm} />
         )}
 
-        {/* Route: /vehiculos */}
         {currentPath === "/vehiculos" && (
           <VehiclesPage onSelectVehicle={handleSelectVehicleFromCatalog} />
         )}
 
-        {/* Route: /nosotros */}
         {currentPath === "/nosotros" && (
           <AboutPage onCtaClick={handleScrollToForm} />
         )}
 
-        {/* Route: /contacto */}
         {currentPath === "/contacto" && (
           <ContactPage prefilledVehicle={selectedVehicle} />
         )}
 
-        {/* Route: /privacidad, /aviso-legal, /cookies */}
         {(currentPath === "/privacidad" ||
           currentPath === "/aviso-legal" ||
           currentPath === "/cookies") && (
@@ -272,55 +256,41 @@ export default function App() {
           />
         )}
 
-        {/* Route: / (Home - Showroom Digital Premium) */}
         {currentPath === "/" && (
           <>
-            {/* HERO */}
             <Hero
               onCtaClick={handleScrollToForm}
               onProcessClick={() => navigateTo("/proceso")}
             />
 
-            {/* 01 / SHOWROOM — VEHÍCULOS */}
             <ShowroomVehicles
               onNavigateVehicles={() => navigateTo("/vehiculos")}
               onSelectVehicle={handleSelectVehicleFromCatalog}
             />
 
-            {/* 02 / QUÉ SOMOS — PERSONAL CAR SHOPPER */}
             <ShowroomPositioning
               onNavigateService={() => navigateTo("/servicio")}
             />
 
-            {/* 03 / POR QUÉ ALEMANIA */}
             <ShowroomWhyGermany
               onNavigateAdvantages={() => navigateTo("/importacion")}
             />
 
-            {/* 04 / INTELIGENCIA — CRITERIO */}
             <ShowroomIntelligence
               onNavigateMethod={() => navigateTo("/servicio")}
             />
 
-            {/* 05 / PROCESO — 5 ETAPAS */}
             <ShowroomProcess
               onNavigateProcess={() => navigateTo("/proceso")}
             />
 
-            {/* 06 / CONVERSIÓN */}
-            <ShowroomConversion
-              onCtaClick={handleScrollToForm}
-            />
+            <ShowroomConversion onCtaClick={handleScrollToForm} />
 
-            {/* CIERRE CINEMATOGRÁFICO */}
-            <ShowroomClosing
-              onCtaClick={handleScrollToForm}
-            />
+            <ShowroomClosing />
           </>
         )}
       </main>
 
-      {/* Footer with comprehensive links and mandatory disclaimer */}
       <Footer
         onNavigate={navigateTo}
         onOpenLeadForm={handleScrollToForm}
