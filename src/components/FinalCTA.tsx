@@ -20,7 +20,7 @@ export const FinalCTA: React.FC<FinalCTAProps> = ({ onCtaClick }) => {
   const backgroundY = useTransform(
     scrollYProgress,
     [0, 1],
-    ["-6%", shouldReduceMotion ? "-6%" : "6%"]
+    ["-3%", shouldReduceMotion ? "-3%" : "3%"]
   );
 
   return (
@@ -29,27 +29,26 @@ export const FinalCTA: React.FC<FinalCTAProps> = ({ onCtaClick }) => {
       id="cta-final"
       className="relative min-h-[80vh] sm:min-h-[85vh] flex items-center justify-center py-24 bg-[#0A0A0A] text-white overflow-hidden"
     >
-      {/* Background Image Container with Parallax and Zoom */}
+      {/* Background Image Container with Stable, Subtle Parallax */}
       <div className="absolute inset-0 z-0 select-none overflow-hidden pointer-events-none">
         <motion.div
           style={{ y: backgroundY }}
-          initial={{ scale: shouldReduceMotion ? 1 : 1.06 }}
-          whileInView={{ scale: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 1.6, ease: [0.16, 1, 0.3, 1] }}
-          className="w-full h-full scale-110"
+          initial={{ scale: shouldReduceMotion ? 1 : 1.02 }}
+          animate={{ scale: 1 }}
+          transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+          className="w-full h-full"
         >
           <img
             src={finalCtaCarImage}
             alt="BMW M de altas prestaciones en entorno europeo exclusivo"
-            className="w-full h-full object-cover object-center filter brightness-[0.45] contrast-[1.15]"
+            className="w-full h-full object-cover object-center brightness-[0.88] contrast-[1.04]"
             loading="lazy"
             referrerPolicy="no-referrer"
           />
         </motion.div>
-        {/* Layered vignette */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-transparent to-[#0A0A0A]/80" />
-        <div className="absolute inset-0 bg-[#0A0A0A]/45" />
+        {/* Balanced readability gradient: ensures vehicle lines and wheels remain clearly visible */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-[#0A0A0A]/45 to-[#0A0A0A]/35" />
+        <div className="absolute inset-0 bg-radial-gradient from-transparent to-[#0A0A0A]/30 pointer-events-none" />
       </div>
 
       {/* Content */}

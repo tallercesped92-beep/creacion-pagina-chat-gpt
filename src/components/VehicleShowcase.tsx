@@ -121,7 +121,7 @@ export const VehicleShowcase: React.FC<VehicleShowcaseProps> = ({
                 <img
                   src={vehicle.image}
                   alt={vehicle.alt}
-                  className="w-full h-full object-cover object-center filter contrast-[1.05] brightness-95 group-hover:scale-105 transition-transform duration-700 ease-out"
+                  className="w-full h-full object-cover object-center brightness-100 contrast-[1.02] group-hover:scale-[1.025] transition-transform duration-1000 ease-[0.16,1,0.3,1]"
                   loading="lazy"
                   referrerPolicy="no-referrer"
                 />

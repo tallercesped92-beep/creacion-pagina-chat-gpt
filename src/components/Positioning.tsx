@@ -1,48 +1,9 @@
 import React, { useState } from "react";
-import { motion, useMotionValue, useSpring, useTransform } from "motion/react";
+import { motion } from "motion/react";
 import bmw120Image from "../assets/images/bmw_120_m_sport_pro_1787264242590.jpg";
 
 export const Positioning: React.FC = () => {
   const [isHovered, setIsHovered] = useState(false);
-
-  // Motion values for smooth cursor tracking
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-
-  // Spring physics for smooth, organic, slow luxury motion
-  const springConfig = { damping: 28, stiffness: 100, mass: 0.6 };
-  const smoothX = useSpring(mouseX, springConfig);
-  const smoothY = useSpring(mouseY, springConfig);
-
-  // Parallax translation & subtle tilt
-  const carTranslateX = useTransform(smoothX, [-0.5, 0.5], [-12, 12]);
-  const carTranslateY = useTransform(smoothY, [-0.5, 0.5], [-8, 8]);
-  const carRotateY = useTransform(smoothX, [-0.5, 0.5], [-4, 4]);
-  const carRotateX = useTransform(smoothY, [-0.5, 0.5], [3, -3]);
-
-  // Dynamic shadow displacement responding inversely to tilt
-  const shadowX = useTransform(smoothX, [-0.5, 0.5], [16, -16]);
-  const shadowY = useTransform(smoothY, [-0.5, 0.5], [8, -8]);
-  const shadowScale = useTransform(smoothY, [-0.5, 0.5], [0.96, 1.04]);
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    if (!rect.width || !rect.height) return;
-    const x = (e.clientX - rect.left) / rect.width - 0.5;
-    const y = (e.clientY - rect.top) / rect.height - 0.5;
-    mouseX.set(x);
-    mouseY.set(y);
-  };
-
-  const handleMouseEnter = () => {
-    setIsHovered(true);
-  };
-
-  const handleMouseLeave = () => {
-    setIsHovered(false);
-    mouseX.set(0);
-    mouseY.set(0);
-  };
 
   return (
     <section
@@ -110,47 +71,31 @@ export const Positioning: React.FC = () => {
             viewport={{ once: true, margin: "-40px" }}
             transition={{ duration: 0.8, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
             className="lg:col-span-6 relative w-full flex items-center justify-center cursor-pointer"
-            onMouseMove={handleMouseMove}
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
-            style={{ perspective: 1200 }}
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
           >
-            {/* Interactive Vehicle Container */}
+            {/* Interactive Vehicle Container - Grounded & Geometrically Stable */}
             <motion.div
-              style={{
-                x: carTranslateX,
-                y: carTranslateY,
-                rotateY: carRotateY,
-                rotateX: carRotateX,
-                transformStyle: "preserve-3d",
-              }}
               animate={{
-                scale: isHovered ? 1.035 : 1,
+                scale: isHovered ? 1.02 : 1,
               }}
               transition={{
-                scale: { duration: 0.6, ease: [0.16, 1, 0.3, 1] },
+                scale: { duration: 0.8, ease: [0.16, 1, 0.3, 1] },
               }}
               className="relative w-full max-w-[620px] mx-auto py-4 sm:py-6"
             >
               {/* Automotive Floor Shadow */}
-              <motion.div
-                style={{
-                  x: shadowX,
-                  y: shadowY,
-                  scale: shadowScale,
-                }}
-                animate={{
-                  opacity: isHovered ? 0.35 : 0.22,
-                }}
-                transition={{ duration: 0.5 }}
-                className="absolute -bottom-2 sm:-bottom-4 left-1/2 -translate-x-1/2 w-[88%] h-8 sm:h-12 bg-[#111111] blur-xl rounded-[100%] pointer-events-none -z-10"
+              <div
+                className={`absolute -bottom-2 sm:-bottom-4 left-1/2 -translate-x-1/2 w-[88%] h-8 sm:h-12 bg-[#111111] blur-xl rounded-[100%] pointer-events-none -z-10 transition-opacity duration-700 ${
+                  isHovered ? "opacity-35" : "opacity-22"
+                }`}
               />
 
               {/* Complete, uncropped BMW 120 M Sport Pro */}
               <img
                 src={bmw120Image}
                 alt="BMW 120 M Sport Pro en gris grafito metálico con pinzas de freno rojas M Sport y llantas deportivas M"
-                className="w-full h-auto object-contain select-none pointer-events-none drop-shadow-[0_20px_25px_rgba(0,0,0,0.12)]"
+                className="w-full h-auto object-contain select-none pointer-events-none drop-shadow-[0_16px_20px_rgba(0,0,0,0.12)] transition-transform duration-700"
                 loading="lazy"
                 referrerPolicy="no-referrer"
               />

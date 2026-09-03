@@ -22,7 +22,7 @@ export const ShowroomMarket: React.FC<ShowroomMarketProps> = ({
               <img
                 src={golfGtiImage}
                 alt="Volkswagen Golf GTI Mk8 importado de Alemania"
-                className="w-full h-full object-cover object-center filter brightness-95 contrast-[1.05] group-hover:scale-105 transition-transform duration-700 ease-out"
+                className="w-full h-full object-cover object-center brightness-100 contrast-[1.02] group-hover:scale-[1.025] transition-transform duration-1000 ease-[0.16,1,0.3,1]"
                 loading="lazy"
                 referrerPolicy="no-referrer"
               />

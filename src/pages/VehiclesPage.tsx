@@ -100,8 +100,9 @@ export const VehiclesPage: React.FC<VehiclesPageProps> = ({
                 <img
                   src={car.image}
                   alt={car.name}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 filter brightness-90 contrast-110"
+                  className="w-full h-full object-cover group-hover:scale-[1.025] transition-transform duration-1000 ease-[0.16,1,0.3,1] brightness-100 contrast-[1.02]"
                   loading="lazy"
+                  referrerPolicy="no-referrer"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#141414] via-transparent to-transparent" />
                 <span className="absolute top-4 left-4 text-[10px] font-mono tracking-widest uppercase bg-black/70 px-2.5 py-1 text-white/90 backdrop-blur-sm border border-white/10">

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { motion, useMotionValue, useSpring, useTransform } from "motion/react";
+import { motion } from "motion/react";
 import { ArrowRight } from "lucide-react";
 import bmw120Image from "../../assets/images/bmw_120_m_sport_pro_1787264242590.jpg";
 
@@ -11,32 +11,6 @@ export const ShowroomPositioning: React.FC<ShowroomPositioningProps> = ({
   onNavigateService,
 }) => {
   const [isHovered, setIsHovered] = useState(false);
-
-  // Motion values for smooth cursor tracking
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-
-  const springConfig = { damping: 28, stiffness: 100, mass: 0.6 };
-  const smoothX = useSpring(mouseX, springConfig);
-  const smoothY = useSpring(mouseY, springConfig);
-
-  const carTranslateX = useTransform(smoothX, [-0.5, 0.5], [-12, 12]);
-  const carTranslateY = useTransform(smoothY, [-0.5, 0.5], [-8, 8]);
-  const carRotateY = useTransform(smoothX, [-0.5, 0.5], [-4, 4]);
-  const carRotateX = useTransform(smoothY, [-0.5, 0.5], [3, -3]);
-
-  const shadowX = useTransform(smoothX, [-0.5, 0.5], [16, -16]);
-  const shadowY = useTransform(smoothY, [-0.5, 0.5], [8, -8]);
-  const shadowScale = useTransform(smoothY, [-0.5, 0.5], [0.96, 1.04]);
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    if (!rect.width || !rect.height) return;
-    const x = (e.clientX - rect.left) / rect.width - 0.5;
-    const y = (e.clientY - rect.top) / rect.height - 0.5;
-    mouseX.set(x);
-    mouseY.set(y);
-  };
 
   return (
     <section
@@ -79,59 +53,40 @@ export const ShowroomPositioning: React.FC<ShowroomPositioningProps> = ({
             </div>
           </div>
 
-          {/* Right Column: Interactive BMW 120 M Sport Pro Visual */}
+          {/* Right Column: Geometrically Stable, High-End BMW 120 M Sport Pro Studio Presentation */}
           <div
             className="lg:col-span-6 relative w-full flex items-center justify-center cursor-pointer"
-            onMouseMove={handleMouseMove}
             onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => {
-              setIsHovered(false);
-              mouseX.set(0);
-              mouseY.set(0);
-            }}
-            style={{ perspective: 1200 }}
+            onMouseLeave={() => setIsHovered(false)}
           >
             <motion.div
-              style={{
-                x: carTranslateX,
-                y: carTranslateY,
-                rotateY: carRotateY,
-                rotateX: carRotateX,
-                transformStyle: "preserve-3d",
-              }}
               animate={{
-                scale: isHovered ? 1.03 : 1,
+                scale: isHovered ? 1.018 : 1,
               }}
               transition={{
-                scale: { duration: 0.5, ease: [0.16, 1, 0.3, 1] },
+                duration: 0.8,
+                ease: [0.16, 1, 0.3, 1],
               }}
               className="relative w-full max-w-[580px] mx-auto py-6"
             >
-              {/* Floor Ambient Shadow */}
-              <motion.div
-                style={{
-                  x: shadowX,
-                  y: shadowY,
-                  scale: shadowScale,
-                }}
-                animate={{
-                  opacity: isHovered ? 0.45 : 0.25,
-                }}
-                transition={{ duration: 0.4 }}
-                className="absolute -bottom-2 sm:-bottom-4 left-1/2 -translate-x-1/2 w-[85%] h-8 bg-black/30 blur-2xl rounded-full pointer-events-none -z-10"
+              {/* Grounded Floor Ambient Shadow: Statically stable, realistic depth */}
+              <div
+                className={`absolute -bottom-2 sm:-bottom-4 left-1/2 -translate-x-1/2 w-[88%] h-8 bg-black/25 blur-xl rounded-full pointer-events-none -z-10 transition-opacity duration-700 ${
+                  isHovered ? "opacity-35" : "opacity-25"
+                }`}
               />
 
-              {/* BMW 120 M Sport Pro */}
+              {/* BMW 120 M Sport Pro: completely stable, crisp, original photography */}
               <img
                 src={bmw120Image}
                 alt="BMW 120 M Sport Pro con pinzas M Sport rojas y llantas deportivas"
-                className="w-full h-auto object-contain select-none pointer-events-none filter drop-shadow-[0_20px_25px_rgba(0,0,0,0.22)]"
+                className="w-full h-auto object-contain select-none pointer-events-none filter drop-shadow-[0_16px_20px_rgba(0,0,0,0.18)] transition-all duration-700"
                 loading="lazy"
                 referrerPolicy="no-referrer"
               />
 
               <div className="mt-4 text-center">
-                <span className="text-[10px] font-mono tracking-widest text-[#0A0A0A]/45 uppercase">
+                <span className="text-[10px] font-mono tracking-widest text-[#0A0A0A]/50 uppercase">
                   BMW 120 M SPORT PRO · REFERENCIA DE CONFIGURACIÓN
                 </span>
               </div>
