@@ -1,7 +1,8 @@
-import React, { useRef } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { motion, useScroll, useTransform, useReducedMotion } from "motion/react";
 import { ArrowRight, ChevronDown } from "lucide-react";
-import heroCarImage from "../assets/images/audi_rs6_hero_1787228419698.jpg";
+import heroPosterImage from "../assets/images/bmw_m4_darkness_1788475162547.jpg";
+import heroAudiFallback from "../assets/images/audi_rs6_hero_1787228419698.jpg";
 import { MagneticCTA } from "./MagneticCTA";
 
 interface HeroProps {
@@ -12,6 +13,20 @@ interface HeroProps {
 export const Hero: React.FC<HeroProps> = ({ onCtaClick, onProcessClick }) => {
   const shouldReduceMotion = useReducedMotion();
   const sectionRef = useRef<HTMLElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [isVideoLoaded, setIsVideoLoaded] = useState(false);
+  const [videoError, setVideoError] = useState(false);
+
+  // Attempt video play on mount
+  useEffect(() => {
+    if (shouldReduceMotion) return;
+    const video = videoRef.current;
+    if (video) {
+      video.play().catch(() => {
+        // Autoplay policy fallback: muted autoplay should work in modern browsers
+      });
+    }
+  }, [shouldReduceMotion]);
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -59,31 +74,56 @@ export const Hero: React.FC<HeroProps> = ({ onCtaClick, onProcessClick }) => {
       id="hero-section"
       className="relative min-h-screen w-full flex items-end pb-16 sm:pb-24 pt-28 sm:pt-32 overflow-hidden bg-[#0A0A0A] text-white"
     >
-      {/* Background Image Container with Subtle Parallax - High visual prominence */}
+      {/* Background Cinematic Video Container with Subtle Parallax */}
       <div className="absolute inset-0 z-0 select-none pointer-events-none overflow-hidden">
         <motion.div
           style={{ y: backgroundY }}
-          initial={{ scale: shouldReduceMotion ? 1 : 1.06, opacity: 0 }}
+          initial={{ scale: shouldReduceMotion ? 1 : 1.05, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{
-            duration: shouldReduceMotion ? 0.3 : 1.4,
+            duration: shouldReduceMotion ? 0.3 : 1.6,
             ease: [0.16, 1, 0.3, 1],
           }}
           className="w-full h-full scale-105"
         >
+          {/* Static Poster Image Fallback / Instant First Paint */}
           <img
-            src={heroCarImage}
-            alt="Audi RS6 Avant de altas prestaciones importado desde Alemania"
-            className="w-full h-full object-cover object-[center_35%] sm:object-center filter brightness-[0.82] sm:brightness-[0.70] contrast-[1.12]"
+            src={heroPosterImage || heroAudiFallback}
+            alt="Vehículos de alta gama importados de Alemania - Céspedes Automotriz"
+            className={`absolute inset-0 w-full h-full object-cover object-[center_40%] sm:object-center filter brightness-[0.78] sm:brightness-[0.70] contrast-[1.10] transition-opacity duration-1000 ${
+              isVideoLoaded && !shouldReduceMotion ? "opacity-0" : "opacity-100"
+            }`}
             loading="eager"
             referrerPolicy="no-referrer"
           />
+
+          {/* Cinematic Automotive Video Reel */}
+          {!shouldReduceMotion && !videoError && (
+            <video
+              ref={videoRef}
+              autoPlay
+              loop
+              muted
+              playsInline
+              preload="auto"
+              poster={heroPosterImage}
+              onCanPlay={() => setIsVideoLoaded(true)}
+              onError={() => setVideoError(true)}
+              className={`absolute inset-0 w-full h-full object-cover object-[center_40%] sm:object-center filter brightness-[0.78] sm:brightness-[0.72] contrast-[1.10] transition-opacity duration-1000 ${
+                isVideoLoaded ? "opacity-100" : "opacity-0"
+              }`}
+            >
+              <source src="/videos/hero_cinematic_automotive.mp4" type="video/mp4" />
+              <source src="/videos/hero_cinematic_automotive.webm" type="video/webm" />
+            </video>
+          )}
         </motion.div>
 
-        {/* Multi-layered Gradients tuned to keep car clearly visible while text is crisp */}
+        {/* Multi-layered Gradients tuned to keep vehicles visually prominent while ensuring crisp text readability */}
         <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-[#0A0A0A]/40 to-[#0A0A0A]/20" />
         <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0A]/85 sm:from-[#0A0A0A]/80 via-[#0A0A0A]/35 to-transparent" />
         <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-[#0A0A0A] to-transparent" />
+        <div className="absolute inset-0 bg-radial-gradient from-transparent via-[#0A0A0A]/20 to-[#0A0A0A]/60 pointer-events-none" />
       </div>
 
       {/* Hero Content Container */}
@@ -138,9 +178,7 @@ export const Hero: React.FC<HeroProps> = ({ onCtaClick, onProcessClick }) => {
                       delay: shouldReduceMotion ? 0 : 0.45 + index * 0.08,
                       ease: [0.16, 1, 0.3, 1],
                     }}
-                    className={`inline-block ${
-                      word === "GARAJE." ? "text-[#F3F2EF]" : "text-[#F3F2EF]"
-                    }`}
+                    className="inline-block text-[#F3F2EF]"
                   >
                     {word}
                   </motion.span>
