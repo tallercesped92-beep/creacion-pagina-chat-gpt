@@ -1,11 +1,7 @@
 import React from "react";
 import bmwM3Image from "../../assets/images/bmw_m3_competition_1787228432881.jpg";
 
-interface ShowroomClosingProps {
-  onCtaClick?: () => void;
-}
-
-export const ShowroomClosing: React.FC<ShowroomClosingProps> = () => {
+export const ShowroomClosing: React.FC = () => {
   return (
     <section
       id="cierre"
