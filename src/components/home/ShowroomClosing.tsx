@@ -1,14 +1,11 @@
 import React from "react";
-import { ArrowRight } from "lucide-react";
 import bmwM3Image from "../../assets/images/bmw_m3_competition_1787228432881.jpg";
 
 interface ShowroomClosingProps {
-  onCtaClick: () => void;
+  onCtaClick?: () => void;
 }
 
-export const ShowroomClosing: React.FC<ShowroomClosingProps> = ({
-  onCtaClick,
-}) => {
+export const ShowroomClosing: React.FC<ShowroomClosingProps> = () => {
   return (
     <section
       id="cierre"
@@ -33,18 +30,8 @@ export const ShowroomClosing: React.FC<ShowroomClosingProps> = ({
           <span className="text-[#C8102E]">EMPIEZA CON UNA BÚSQUEDA.</span>
         </h2>
 
-        <div>
-          <button
-            onClick={onCtaClick}
-            className="px-9 py-4 sm:py-5 bg-[#C8102E] hover:bg-[#A50C25] text-[#FAF9F6] text-xs sm:text-sm font-bold tracking-[0.18em] uppercase transition-all duration-200 shadow-2xl shadow-[#C8102E]/30 inline-flex items-center space-x-3 cursor-pointer group"
-          >
-            <span>ENCONTRAR MI COCHE</span>
-            <ArrowRight className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" />
-          </button>
-        </div>
-
         {/* Subtle Brand Signature */}
-        <p className="text-xs text-[#F3F2EF]/50 font-light max-w-xl mx-auto tracking-wide leading-relaxed mt-10">
+        <p className="text-xs sm:text-sm text-[#F3F2EF]/60 font-light max-w-2xl mx-auto tracking-wide leading-relaxed">
           Investigación, auditoría y acompañamiento profesional para la adquisición e importación de vehículos desde Alemania hacia España. Criterio técnico independiente y presupuesto cerrado.
         </p>
       </div>
