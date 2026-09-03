@@ -1,0 +1,6 @@
+{
+  "name": "CÉSPEDES AUTOMOTRIZ",
+  "description": "Personal Car Shopper y consultoría automotriz para la búsqueda, investigación e importación de vehículos desde Alemania hacia España.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
