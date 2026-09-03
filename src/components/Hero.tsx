@@ -17,14 +17,11 @@ export const Hero: React.FC<HeroProps> = ({ onCtaClick, onProcessClick }) => {
   const [isVideoLoaded, setIsVideoLoaded] = useState(false);
   const [videoError, setVideoError] = useState(false);
 
-  // Attempt video play on mount
   useEffect(() => {
     if (shouldReduceMotion) return;
     const video = videoRef.current;
     if (video) {
-      video.play().catch(() => {
-        // Autoplay policy fallback: muted autoplay should work in modern browsers
-      });
+      video.play().catch(() => {});
     }
   }, [shouldReduceMotion]);
 
@@ -33,11 +30,10 @@ export const Hero: React.FC<HeroProps> = ({ onCtaClick, onProcessClick }) => {
     offset: ["start start", "end start"],
   });
 
-  // Very subtle parallax displacement
   const backgroundY = useTransform(
     scrollYProgress,
     [0, 1],
-    ["0%", shouldReduceMotion ? "0%" : "10%"]
+    ["0%", shouldReduceMotion ? "0%" : "6%"]
   );
 
   const scrollToNext = () => {
@@ -46,10 +42,7 @@ export const Hero: React.FC<HeroProps> = ({ onCtaClick, onProcessClick }) => {
       const headerOffset = 80;
       const elementPosition = el.getBoundingClientRect().top;
       const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: "smooth",
-      });
+      window.scrollTo({ top: offsetPosition, behavior: "smooth" });
     }
   };
 
@@ -59,12 +52,9 @@ export const Hero: React.FC<HeroProps> = ({ onCtaClick, onProcessClick }) => {
       return;
     }
     const el = document.getElementById("proceso");
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth" });
-    }
+    if (el) el.scrollIntoView({ behavior: "smooth" });
   };
 
-  // Words for word-by-word masked reveal
   const line1Words = ["EL", "MERCADO", "ALEMÁN."];
   const line2Words = ["EN", "TU", "GARAJE."];
 
@@ -74,30 +64,28 @@ export const Hero: React.FC<HeroProps> = ({ onCtaClick, onProcessClick }) => {
       id="hero-section"
       className="relative min-h-screen w-full flex items-end pb-16 sm:pb-24 pt-28 sm:pt-32 overflow-hidden bg-[#0A0A0A] text-white"
     >
-      {/* Background Cinematic Video Container with Subtle Parallax */}
+      {/* Background video: keep the image visible and let the content provide the contrast. */}
       <div className="absolute inset-0 z-0 select-none pointer-events-none overflow-hidden">
         <motion.div
           style={{ y: backgroundY }}
-          initial={{ scale: shouldReduceMotion ? 1 : 1.05, opacity: 0 }}
+          initial={{ scale: shouldReduceMotion ? 1 : 1.03, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{
-            duration: shouldReduceMotion ? 0.3 : 1.6,
+            duration: shouldReduceMotion ? 0.3 : 1.2,
             ease: [0.16, 1, 0.3, 1],
           }}
-          className="w-full h-full scale-105"
+          className="w-full h-full"
         >
-          {/* Static Poster Image Fallback / Instant First Paint */}
           <img
             src={heroPosterImage || heroAudiFallback}
             alt="Vehículos de alta gama importados de Alemania - Céspedes Automotriz"
-            className={`absolute inset-0 w-full h-full object-cover object-[center_40%] sm:object-center filter brightness-[0.78] sm:brightness-[0.70] contrast-[1.10] transition-opacity duration-1000 ${
+            className={`absolute inset-0 w-full h-full object-cover object-[center_42%] sm:object-center brightness-[0.92] contrast-[1.05] transition-opacity duration-700 ${
               isVideoLoaded && !shouldReduceMotion ? "opacity-0" : "opacity-100"
             }`}
             loading="eager"
             referrerPolicy="no-referrer"
           />
 
-          {/* Cinematic Automotive Video Reel */}
           {!shouldReduceMotion && !videoError && (
             <video
               ref={videoRef}
@@ -109,7 +97,7 @@ export const Hero: React.FC<HeroProps> = ({ onCtaClick, onProcessClick }) => {
               poster={heroPosterImage}
               onCanPlay={() => setIsVideoLoaded(true)}
               onError={() => setVideoError(true)}
-              className={`absolute inset-0 w-full h-full object-cover object-[center_40%] sm:object-center filter brightness-[0.78] sm:brightness-[0.72] contrast-[1.10] transition-opacity duration-1000 ${
+              className={`absolute inset-0 w-full h-full object-cover object-[center_42%] sm:object-center brightness-[0.92] contrast-[1.05] transition-opacity duration-700 ${
                 isVideoLoaded ? "opacity-100" : "opacity-0"
               }`}
             >
@@ -119,39 +107,24 @@ export const Hero: React.FC<HeroProps> = ({ onCtaClick, onProcessClick }) => {
           )}
         </motion.div>
 
-        {/* Multi-layered Gradients tuned to keep vehicles visually prominent while ensuring crisp text readability */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-[#0A0A0A]/40 to-[#0A0A0A]/20" />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0A]/85 sm:from-[#0A0A0A]/80 via-[#0A0A0A]/35 to-transparent" />
-        <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-[#0A0A0A] to-transparent" />
-        <div className="absolute inset-0 bg-radial-gradient from-transparent via-[#0A0A0A]/20 to-[#0A0A0A]/60 pointer-events-none" />
+        {/* One restrained readability layer instead of multiple dark overlays. */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0A]/72 via-[#0A0A0A]/28 to-transparent sm:from-[#0A0A0A]/62 sm:via-[#0A0A0A]/18" />
+        <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[#0A0A0A]/65 to-transparent" />
       </div>
 
-      {/* Hero Content Container */}
       <div className="relative z-20 max-w-7xl mx-auto px-6 sm:px-8 w-full">
         <div className="max-w-3xl">
-          {/* Main Headline - Word by Word Masked Entrance */}
           <h1
             id="hero-main-title"
             className="font-display text-4xl sm:text-6xl md:text-7xl lg:text-[5rem] font-bold tracking-tight uppercase leading-[1.04] text-[#F3F2EF] mb-8 drop-shadow-md"
           >
-            {/* Line 1 */}
             <span className="block overflow-hidden pb-1">
               {line1Words.map((word, index) => (
-                <span
-                  key={index}
-                  className="inline-block overflow-hidden mr-[0.25em] align-top"
-                >
+                <span key={index} className="inline-block overflow-hidden mr-[0.25em] align-top">
                   <motion.span
-                    initial={{
-                      y: shouldReduceMotion ? 0 : "110%",
-                      opacity: shouldReduceMotion ? 1 : 0,
-                    }}
+                    initial={{ y: shouldReduceMotion ? 0 : "110%", opacity: shouldReduceMotion ? 1 : 0 }}
                     animate={{ y: 0, opacity: 1 }}
-                    transition={{
-                      duration: 0.8,
-                      delay: shouldReduceMotion ? 0 : 0.2 + index * 0.08,
-                      ease: [0.16, 1, 0.3, 1],
-                    }}
+                    transition={{ duration: 0.8, delay: shouldReduceMotion ? 0 : 0.2 + index * 0.08, ease: [0.16, 1, 0.3, 1] }}
                     className="inline-block text-[#F3F2EF]"
                   >
                     {word}
@@ -160,24 +133,13 @@ export const Hero: React.FC<HeroProps> = ({ onCtaClick, onProcessClick }) => {
               ))}
             </span>
 
-            {/* Line 2 */}
             <span className="block overflow-hidden pb-1">
               {line2Words.map((word, index) => (
-                <span
-                  key={index}
-                  className="inline-block overflow-hidden mr-[0.25em] align-top"
-                >
+                <span key={index} className="inline-block overflow-hidden mr-[0.25em] align-top">
                   <motion.span
-                    initial={{
-                      y: shouldReduceMotion ? 0 : "110%",
-                      opacity: shouldReduceMotion ? 1 : 0,
-                    }}
+                    initial={{ y: shouldReduceMotion ? 0 : "110%", opacity: shouldReduceMotion ? 1 : 0 }}
                     animate={{ y: 0, opacity: 1 }}
-                    transition={{
-                      duration: 0.8,
-                      delay: shouldReduceMotion ? 0 : 0.45 + index * 0.08,
-                      ease: [0.16, 1, 0.3, 1],
-                    }}
+                    transition={{ duration: 0.8, delay: shouldReduceMotion ? 0 : 0.45 + index * 0.08, ease: [0.16, 1, 0.3, 1] }}
                     className="inline-block text-[#F3F2EF]"
                   >
                     {word}
@@ -187,32 +149,21 @@ export const Hero: React.FC<HeroProps> = ({ onCtaClick, onProcessClick }) => {
             </span>
           </h1>
 
-          {/* Subtext - Concise and direct value proposition in refined ivory */}
           <motion.p
             initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{
-              duration: 0.8,
-              delay: shouldReduceMotion ? 0 : 0.7,
-              ease: [0.16, 1, 0.3, 1],
-            }}
-            className="text-base sm:text-lg md:text-xl text-[#F3F2EF]/80 font-light leading-relaxed max-w-2xl mb-10"
+            transition={{ duration: 0.8, delay: shouldReduceMotion ? 0 : 0.7, ease: [0.16, 1, 0.3, 1] }}
+            className="text-base sm:text-lg md:text-xl text-[#F3F2EF]/85 font-light leading-relaxed max-w-2xl mb-10"
           >
             Accedemos al mercado alemán para localizar, analizar y verificar el vehículo que buscas, gestionando toda la operación hasta España.
           </motion.p>
 
-          {/* CTAs Group */}
           <motion.div
             initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{
-              duration: 0.8,
-              delay: shouldReduceMotion ? 0 : 0.85,
-              ease: [0.16, 1, 0.3, 1],
-            }}
+            transition={{ duration: 0.8, delay: shouldReduceMotion ? 0 : 0.85, ease: [0.16, 1, 0.3, 1] }}
             className="flex flex-col sm:flex-row items-stretch sm:items-center gap-5"
           >
-            {/* CTA Principal */}
             <MagneticCTA
               id="hero-cta-button"
               onClick={onCtaClick}
@@ -222,11 +173,10 @@ export const Hero: React.FC<HeroProps> = ({ onCtaClick, onProcessClick }) => {
               <ArrowRight className="w-4 h-4 ml-2.5 sm:ml-3 flex-shrink-0 transform group-hover:translate-x-1 transition-transform" />
             </MagneticCTA>
 
-            {/* Enlace contextual cómo funciona */}
             <button
               id="hero-secondary-cta"
               onClick={handleProcessClick}
-              className="px-5 py-3.5 text-[#F3F2EF]/70 hover:text-[#F3F2EF] text-xs font-semibold tracking-[0.16em] uppercase transition-colors cursor-pointer text-center sm:text-left inline-flex items-center justify-center sm:justify-start group"
+              className="px-5 py-3.5 text-[#F3F2EF]/80 hover:text-[#F3F2EF] text-xs font-semibold tracking-[0.16em] uppercase transition-colors cursor-pointer text-center sm:text-left inline-flex items-center justify-center sm:justify-start group"
             >
               <span>CÓMO FUNCIONA</span>
               <ArrowRight className="w-3.5 h-3.5 ml-2 transform group-hover:translate-x-1 transition-transform" />
@@ -235,7 +185,6 @@ export const Hero: React.FC<HeroProps> = ({ onCtaClick, onProcessClick }) => {
         </div>
       </div>
 
-      {/* Down Scroll Indicator */}
       <motion.button
         id="hero-scroll-indicator"
         onClick={scrollToNext}
@@ -245,7 +194,7 @@ export const Hero: React.FC<HeroProps> = ({ onCtaClick, onProcessClick }) => {
         aria-label="Desplazarse hacia abajo"
         className="absolute bottom-6 left-1/2 transform -translate-x-1/2 z-20 text-white/40 hover:text-white transition-colors cursor-pointer flex flex-col items-center"
       >
-        <ChevronDown className="w-5 h-5 animate-bounce" />
+        <ChevronDown className="w-5 h-5" />
       </motion.button>
     </section>
   );
