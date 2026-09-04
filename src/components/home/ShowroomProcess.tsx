@@ -1,5 +1,6 @@
 import React from "react";
 import { ArrowRight } from "lucide-react";
+import bmwM340iImage from "../../assets/images/bmw_m340i_1787232369357.jpg";
 
 interface ShowroomProcessProps {
   onNavigateProcess: () => void;
@@ -22,14 +23,8 @@ export const ShowroomProcess: React.FC<ShowroomProcessProps> = ({
       className="py-24 sm:py-32 bg-[#EAE8E2] text-[#0A0A0A] border-b border-black/10"
     >
       <div className="max-w-7xl mx-auto px-6 sm:px-8">
-        {/* Section Header */}
-        <div className="max-w-3xl mb-14 sm:mb-18">
-          <div className="flex items-center space-x-3 mb-6">
-            <span className="text-xs font-bold tracking-[0.25em] text-[#C8102E] uppercase font-display">
-              05 / EL PROCESO
-            </span>
-            <div className="h-[1px] w-8 bg-black/20" />
-          </div>
+        <div className="max-w-3xl mb-12 sm:mb-16">
+          <div className="w-10 h-[2px] bg-[#C8102E] mb-8" />
 
           <h2 className="font-display text-3xl sm:text-5xl md:text-6xl font-bold tracking-tight uppercase leading-[1.06] text-[#0A0A0A] mb-6">
             DE LA IDEA
@@ -42,93 +37,62 @@ export const ShowroomProcess: React.FC<ShowroomProcessProps> = ({
           </p>
         </div>
 
-        {/* Editorial Milestone Sequence - Asymmetric and Typographic */}
-        <div className="mb-14 pt-8">
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-12 gap-x-6 lg:gap-x-8 gap-y-10">
-            {/* 01 BÚSQUEDA */}
-            <div className="lg:col-span-2 group pt-6 border-t border-black/15 hover:border-[#C8102E] transition-colors flex flex-col justify-between">
-              <span className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-black/20 group-hover:text-[#0A0A0A] transition-colors block leading-none mb-5">
-                01
+        <div className="relative overflow-hidden mb-12 sm:mb-14 min-h-[170px] sm:min-h-[210px]">
+          <img
+            src={bmwM340iImage}
+            alt="BMW M340i en el mercado europeo"
+            className="absolute inset-0 w-full h-full object-cover"
+            loading="lazy"
+            referrerPolicy="no-referrer"
+          />
+          <div className="absolute inset-0 bg-[#0A0A0A]/55" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0A]/80 via-[#0A0A0A]/25 to-transparent" />
+          <div className="relative z-10 min-h-[170px] sm:min-h-[210px] flex items-end p-6 sm:p-8">
+            <div>
+              <span className="text-[10px] sm:text-xs font-mono tracking-[0.18em] uppercase text-[#F3F2EF]/60 block mb-2">
+                UN PROCESO. UNA DECISIÓN.
               </span>
-              <div>
-                <span className="text-[10px] font-mono tracking-widest uppercase text-[#0A0A0A]/40 block mb-1">
-                  FASE 01
-                </span>
-                <h3 className="font-display text-xs sm:text-sm font-bold uppercase tracking-wider text-[#0A0A0A]">
-                  BÚSQUEDA
-                </h3>
-              </div>
-            </div>
-
-            {/* 02 ANÁLISIS */}
-            <div className="lg:col-span-2 group pt-6 border-t border-black/15 hover:border-[#C8102E] transition-colors flex flex-col justify-between">
-              <span className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-black/20 group-hover:text-[#0A0A0A] transition-colors block leading-none mb-5">
-                02
-              </span>
-              <div>
-                <span className="text-[10px] font-mono tracking-widest uppercase text-[#0A0A0A]/40 block mb-1">
-                  FASE 02
-                </span>
-                <h3 className="font-display text-xs sm:text-sm font-bold uppercase tracking-wider text-[#0A0A0A]">
-                  ANÁLISIS
-                </h3>
-              </div>
-            </div>
-
-            {/* 03 SELECCIÓN */}
-            <div className="lg:col-span-2 group pt-6 border-t border-black/15 hover:border-[#C8102E] transition-colors flex flex-col justify-between">
-              <span className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-black/20 group-hover:text-[#0A0A0A] transition-colors block leading-none mb-5">
-                03
-              </span>
-              <div>
-                <span className="text-[10px] font-mono tracking-widest uppercase text-[#0A0A0A]/40 block mb-1">
-                  FASE 03
-                </span>
-                <h3 className="font-display text-xs sm:text-sm font-bold uppercase tracking-wider text-[#0A0A0A]">
-                  SELECCIÓN
-                </h3>
-              </div>
-            </div>
-
-            {/* 04 VERIFICACIÓN */}
-            <div className="lg:col-span-2 group pt-6 border-t border-black/15 hover:border-[#C8102E] transition-colors flex flex-col justify-between">
-              <span className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-black/20 group-hover:text-[#0A0A0A] transition-colors block leading-none mb-5">
-                04
-              </span>
-              <div>
-                <span className="text-[10px] font-mono tracking-widest uppercase text-[#0A0A0A]/40 block mb-1">
-                  FASE 04
-                </span>
-                <h3 className="font-display text-xs sm:text-sm font-bold uppercase tracking-wider text-[#0A0A0A]">
-                  VERIFICACIÓN
-                </h3>
-              </div>
-            </div>
-
-            {/* 05 COMPRA & ENTREGA */}
-            <div className="col-span-2 md:col-span-3 lg:col-span-4 group pt-6 border-t-2 border-[#C8102E] flex flex-col justify-between lg:pl-4">
-              <span className="font-display text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-[#C8102E] block leading-none mb-5">
-                05
-              </span>
-              <div>
-                <h3 className="font-display text-sm sm:text-base lg:text-lg font-bold uppercase tracking-wider text-[#0A0A0A]">
-                  COMPRA & ENTREGA
-                </h3>
-              </div>
+              <p className="font-display text-xl sm:text-2xl md:text-3xl font-bold uppercase text-[#F3F2EF] max-w-xl leading-tight">
+                Del mercado alemán a tu garaje, con cada paso bajo control.
+              </p>
             </div>
           </div>
         </div>
 
-        {/* CTA to Process Page */}
-        <div>
-          <button
-            onClick={onNavigateProcess}
-            className="group inline-flex items-center text-xs sm:text-sm font-bold tracking-[0.18em] uppercase text-[#0A0A0A] hover:text-[#C8102E] transition-colors cursor-pointer"
-          >
-            <span>VER CÓMO FUNCIONA</span>
-            <ArrowRight className="w-4 h-4 ml-2.5 text-[#C8102E] transform group-hover:translate-x-1.5 transition-transform" />
-          </button>
+        <div className="mb-14">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-12 gap-x-6 lg:gap-x-8 gap-y-10">
+            {stages.slice(0, 4).map((stage) => (
+              <div
+                key={stage.num}
+                className="lg:col-span-2 group pt-6 border-t border-black/15 hover:border-[#C8102E] transition-colors flex flex-col justify-between"
+              >
+                <span className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-black/20 group-hover:text-[#0A0A0A] transition-colors block leading-none mb-5">
+                  {stage.num}
+                </span>
+                <h3 className="font-display text-xs sm:text-sm font-bold uppercase tracking-wider text-[#0A0A0A]">
+                  {stage.name}
+                </h3>
+              </div>
+            ))}
+
+            <div className="col-span-2 md:col-span-3 lg:col-span-4 group pt-6 border-t-2 border-[#C8102E] flex flex-col justify-between lg:pl-4">
+              <span className="font-display text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-[#C8102E] block leading-none mb-5">
+                {stages[4].num}
+              </span>
+              <h3 className="font-display text-sm sm:text-base lg:text-lg font-bold uppercase tracking-wider text-[#0A0A0A]">
+                {stages[4].name}
+              </h3>
+            </div>
+          </div>
         </div>
+
+        <button
+          onClick={onNavigateProcess}
+          className="group inline-flex items-center text-xs sm:text-sm font-bold tracking-[0.18em] uppercase text-[#0A0A0A] hover:text-[#C8102E] transition-colors cursor-pointer"
+        >
+          <span>VER CÓMO FUNCIONA</span>
+          <ArrowRight className="w-4 h-4 ml-2.5 text-[#C8102E] transform group-hover:translate-x-1.5 transition-transform" />
+        </button>
       </div>
     </section>
   );
