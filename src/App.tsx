@@ -121,6 +121,16 @@ export default function App() {
 
   const handleScrollToForm = useCallback(() => navigateTo("/contacto"), [navigateTo]);
 
+  const handleScrollToConversion = useCallback(() => {
+    const el = document.getElementById("conversion");
+    if (el) {
+      const headerOffset = 80;
+      const elementPosition = el.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+      window.scrollTo({ top: offsetPosition, behavior: "smooth" });
+    }
+  }, []);
+
   const handleSelectVehicleFromCatalog = useCallback((vehicleName: string) => {
     setSelectedVehicle(vehicleName);
     navigateTo("/contacto");
@@ -157,13 +167,13 @@ export default function App() {
         {(currentPath === "/privacidad" || currentPath === "/aviso-legal" || currentPath === "/cookies") && <LegalPage type={legalType} onNavigateBack={() => navigateTo("/")} onSelectDoc={(t) => navigateTo(`/${t === "legal" ? "aviso-legal" : t}`)} />}
         {currentPath === "/" && (
           <>
-            <Hero onCtaClick={handleScrollToForm} onProcessClick={() => navigateTo("/proceso")} />
+            <Hero onCtaClick={handleScrollToConversion} onProcessClick={() => navigateTo("/proceso")} />
             <ShowroomVehicles onNavigateVehicles={() => navigateTo("/vehiculos")} onSelectVehicle={handleSelectVehicleFromCatalog} />
             <ShowroomPositioning onNavigateService={() => navigateTo("/servicio")} />
             <ShowroomWhyGermany onNavigateAdvantages={() => navigateTo("/importacion")} />
             <ShowroomIntelligence onNavigateMethod={() => navigateTo("/servicio")} />
             <ShowroomProcess onNavigateProcess={() => navigateTo("/proceso")} />
-            <ShowroomConversion onCtaClick={handleScrollToForm} />
+            <ShowroomConversion />
             <ShowroomClosing />
           </>
         )}
