@@ -8,10 +8,8 @@ import {
   Truck,
   FileCheck2,
   ArrowRight,
-  MessageSquare,
   CheckCircle,
 } from "lucide-react";
-import { getWhatsAppUrl } from "../lib/whatsapp";
 import { CustomerPainPoints } from "../components/CustomerPainPoints";
 import { Advantages } from "../components/Advantages";
 import { MarketIntelligence } from "../components/MarketIntelligence";
@@ -91,16 +89,6 @@ export const ServicePage: React.FC<ServicePageProps> = ({ onCtaClick }) => {
               <span>QUIERO BUSCAR MI COCHE</span>
               <ArrowRight className="w-4 h-4 ml-2" />
             </button>
-
-            <a
-              href={getWhatsAppUrl("Hola, me gustaría información detallada sobre vuestro servicio de búsqueda y personal shopper.")}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-6 py-4 bg-white/5 hover:bg-white/10 border border-white/20 text-white text-xs sm:text-sm font-semibold tracking-[0.14em] uppercase transition-colors flex items-center space-x-2"
-            >
-              <MessageSquare className="w-4 h-4 text-white/70" />
-              <span>HABLAR POR WHATSAPP</span>
-            </a>
           </div>
         </div>
 

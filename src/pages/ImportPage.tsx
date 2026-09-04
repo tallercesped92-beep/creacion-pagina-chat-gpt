@@ -8,11 +8,9 @@ import {
   Car,
   AlertTriangle,
   ArrowRight,
-  MessageSquare,
   BadgePercent,
   CheckCircle,
 } from "lucide-react";
-import { getWhatsAppUrl } from "../lib/whatsapp";
 import { MarketSection } from "../components/MarketSection";
 
 interface ImportPageProps {
@@ -95,16 +93,6 @@ export const ImportPage: React.FC<ImportPageProps> = ({ onCtaClick }) => {
               <span>SOLICITAR ESTUDIO DE IMPORTACIÓN</span>
               <ArrowRight className="w-4 h-4 ml-2" />
             </button>
-
-            <a
-              href={getWhatsAppUrl("Hola, quiero consultar el coste aproximado de importar un vehículo concreto desde Alemania.")}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-6 py-4 bg-white/5 hover:bg-white/10 border border-white/20 text-white text-xs sm:text-sm font-semibold tracking-[0.14em] uppercase transition-colors flex items-center space-x-2"
-            >
-              <MessageSquare className="w-4 h-4 text-white/70" />
-              <span>CONSULTAR POR WHATSAPP</span>
-            </a>
           </div>
         </div>
 

@@ -1,7 +1,6 @@
 import React from "react";
 import { motion } from "motion/react";
-import { ArrowRight, Clock, MessageSquare, ShieldCheck, CheckCircle2 } from "lucide-react";
-import { getWhatsAppUrl } from "../lib/whatsapp";
+import { ArrowRight, Clock, ShieldCheck, CheckCircle2 } from "lucide-react";
 import { FAQ } from "../components/FAQ";
 
 interface ProcessPageProps {
@@ -82,16 +81,6 @@ export const ProcessPage: React.FC<ProcessPageProps> = ({ onCtaClick }) => {
               <span>INICIAR MI BÚSQUEDA</span>
               <ArrowRight className="w-4 h-4 ml-2" />
             </button>
-
-            <a
-              href={getWhatsAppUrl("Hola, me gustaría consultar el proceso y tiempos para traer un vehículo desde Alemania.")}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-6 py-4 bg-white/5 hover:bg-white/10 border border-white/20 text-white text-xs sm:text-sm font-semibold tracking-[0.14em] uppercase transition-colors flex items-center space-x-2"
-            >
-              <MessageSquare className="w-4 h-4 text-white/70" />
-              <span>CONSULTAR POR WHATSAPP</span>
-            </a>
           </div>
         </div>
 

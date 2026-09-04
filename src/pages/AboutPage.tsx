@@ -1,7 +1,6 @@
 import React from "react";
 import { motion } from "motion/react";
-import { ShieldCheck, Compass, Scale, ArrowRight, MessageSquare, CheckCircle } from "lucide-react";
-import { getWhatsAppUrl } from "../lib/whatsapp";
+import { ShieldCheck, Compass, Scale, ArrowRight, CheckCircle } from "lucide-react";
 
 interface AboutPageProps {
   onCtaClick: () => void;
@@ -114,16 +113,6 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onCtaClick }) => {
             >
               QUIERO BUSCAR MI COCHE
             </button>
-
-            <a
-              href={getWhatsAppUrl("Hola Céspedes Automotriz, me gustaría conversar sobre vuestro servicio.")}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-6 py-4 bg-white/5 hover:bg-white/10 border border-white/20 text-white text-xs font-semibold tracking-[0.14em] uppercase transition-colors flex items-center space-x-2"
-            >
-              <MessageSquare className="w-4 h-4 text-white/70" />
-              <span>WHATSAPP</span>
-            </a>
           </div>
         </div>
       </div>

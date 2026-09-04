@@ -1,10 +1,9 @@
 import React from "react";
 import { motion } from "motion/react";
-import { ArrowRight, MessageSquare, Info, Sparkles } from "lucide-react";
+import { ArrowRight, Info, Sparkles } from "lucide-react";
 import audiImage from "../assets/images/audi_rs6_hero_1787228419698.jpg";
 import bmwImage from "../assets/images/bmw_m3_competition_1787228432881.jpg";
 import mercedesImage from "../assets/images/mercedes_amg_c63_1787232409009.jpg";
-import { getWhatsAppUrl } from "../lib/whatsapp";
 import { VehicleShowcase } from "../components/VehicleShowcase";
 
 interface VehiclesPageProps {
@@ -160,16 +159,6 @@ export const VehiclesPage: React.FC<VehiclesPageProps> = ({
             >
               SOLICITAR BÚSQUEDA A MEDIDA
             </button>
-
-            <a
-              href={getWhatsAppUrl("Hola, busco un modelo concreto y me gustaría consultar disponibilidad en Alemania.")}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-6 py-4 bg-white/5 hover:bg-white/10 border border-white/20 text-white text-xs font-semibold tracking-[0.14em] uppercase transition-colors flex items-center justify-center space-x-2"
-            >
-              <MessageSquare className="w-4 h-4 text-white/70" />
-              <span>CONSULTAR POR WHATSAPP</span>
-            </a>
           </div>
         </div>
       </div>
