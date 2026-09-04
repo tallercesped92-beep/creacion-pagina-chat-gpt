@@ -50,7 +50,7 @@ export const Hero: React.FC<HeroProps> = ({ onCtaClick, onProcessClick }) => {
           {shouldReduceMotion ? (
             <div className="absolute inset-0 w-full h-full"><img src={HERO_SCENES[0].image} alt={HERO_SCENES[0].alt} className="w-full h-full object-cover object-[center_42%] sm:object-center brightness-[1.04] contrast-[1.04]" loading="eager" referrerPolicy="no-referrer" /></div>
           ) : (
-            <AnimatePresence initial={false}>
+            <AnimatePresence>
               <motion.div key={activeScene.id} initial={{ opacity: 0, scale: activeScene.from.scale, x: activeScene.from.x, y: activeScene.from.y }} animate={{ opacity: 1, scale: activeScene.to.scale, x: activeScene.to.x, y: activeScene.to.y }} exit={{ opacity: 0, transition: { opacity: { duration: FADE_SEC, ease: [0.25, 0.1, 0.25, 1] } } }} transition={{ opacity: { duration: FADE_SEC, ease: [0.25, 0.1, 0.25, 1] }, scale: { duration: DURATION_SEC, ease: "linear" }, x: { duration: DURATION_SEC, ease: "linear" }, y: { duration: DURATION_SEC, ease: "linear" } }} className="absolute inset-0 w-full h-full" style={{ willChange: "transform, opacity", backfaceVisibility: "hidden", WebkitBackfaceVisibility: "hidden" }}>
                 <img src={activeScene.image} alt={activeScene.alt} className="w-full h-full object-cover object-[center_42%] sm:object-center brightness-[1.04] contrast-[1.04]" loading={currentSceneIndex === 0 ? "eager" : "lazy"} referrerPolicy="no-referrer" />
               </motion.div>
