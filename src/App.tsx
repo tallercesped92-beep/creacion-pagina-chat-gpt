@@ -11,7 +11,6 @@ import { ScrollProgressBar } from "./components/ScrollProgressBar";
 import { LeadsDashboard } from "./components/leads/LeadsDashboard";
 import { AdminLogin } from "./components/leads/AdminLogin";
 import { supabase, isSupabaseConfigured } from "./lib/supabase";
-
 import { ShowroomVehicles } from "./components/home/ShowroomVehicles";
 import { ShowroomPositioning } from "./components/home/ShowroomPositioning";
 import { ShowroomWhyGermany } from "./components/home/ShowroomWhyGermany";
@@ -19,7 +18,6 @@ import { ShowroomIntelligence } from "./components/home/ShowroomIntelligence";
 import { ShowroomProcess } from "./components/home/ShowroomProcess";
 import { ShowroomConversion } from "./components/home/ShowroomConversion";
 import { ShowroomClosing } from "./components/home/ShowroomClosing";
-
 import { ServicePage } from "./pages/ServicePage";
 import { ProcessPage } from "./pages/ProcessPage";
 import { ImportPage } from "./pages/ImportPage";
@@ -45,12 +43,10 @@ export default function App() {
     if (path === "/cookies" || hash === "#cookies") return "/cookies";
     return "/";
   };
-
   const [currentPath, setCurrentPath] = useState<string>(getInitialPath);
   const [selectedVehicle, setSelectedVehicle] = useState<string>("");
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const [isCheckingAuth, setIsCheckingAuth] = useState<boolean>(true);
-
   useEffect(() => {
     const handleLocationChange = () => {
       const path = window.location.pathname;
@@ -69,12 +65,8 @@ export default function App() {
     };
     window.addEventListener("popstate", handleLocationChange);
     window.addEventListener("hashchange", handleLocationChange);
-    return () => {
-      window.removeEventListener("popstate", handleLocationChange);
-      window.removeEventListener("hashchange", handleLocationChange);
-    };
+    return () => { window.removeEventListener("popstate", handleLocationChange); window.removeEventListener("hashchange", handleLocationChange); };
   }, []);
-
   useEffect(() => {
     const titles: Record<string, string> = {
       "/": "CÉSPEDES AUTOMOTRIZ | Personal Car Shopper · Importación Alemania",
@@ -91,72 +83,33 @@ export default function App() {
     };
     document.title = titles[currentPath] || titles["/"];
   }, [currentPath]);
-
   useEffect(() => {
-    if (!isSupabaseConfigured || !supabase) {
-      setIsAuthenticated(false);
-      setIsCheckingAuth(false);
-      return;
-    }
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setIsAuthenticated(Boolean(session));
-      setIsCheckingAuth(false);
-    });
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
-      setIsAuthenticated(Boolean(session));
-      setIsCheckingAuth(false);
-    });
+    if (!isSupabaseConfigured || !supabase) { setIsAuthenticated(false); setIsCheckingAuth(false); return; }
+    supabase.auth.getSession().then(({ data: { session } }) => { setIsAuthenticated(Boolean(session)); setIsCheckingAuth(false); });
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => { setIsAuthenticated(Boolean(session)); setIsCheckingAuth(false); });
     return () => subscription.unsubscribe();
   }, []);
-
   const navigateTo = useCallback((route: string) => {
-    try {
-      window.history.pushState({}, "", route);
-    } catch {
-      window.location.hash = route.replace("/", "#");
-    }
-    setCurrentPath(route);
-    window.scrollTo({ top: 0, behavior: "auto" });
+    try { window.history.pushState({}, "", route); } catch { window.location.hash = route.replace("/", "#"); }
+    setCurrentPath(route); window.scrollTo({ top: 0, behavior: "auto" });
   }, []);
-
   const handleScrollToForm = useCallback(() => navigateTo("/contacto"), [navigateTo]);
-
   const handleScrollToConversion = useCallback(() => {
     const el = document.getElementById("conversion");
-    if (el) {
-      const headerOffset = 80;
-      const elementPosition = el.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-      window.scrollTo({ top: offsetPosition, behavior: "smooth" });
-    }
+    if (el) { const headerOffset = 80; const elementPosition = el.getBoundingClientRect().top; const offsetPosition = elementPosition + window.pageYOffset - headerOffset; window.scrollTo({ top: offsetPosition, behavior: "smooth" }); }
   }, []);
-
-  const handleSelectVehicleFromCatalog = useCallback((vehicleName: string) => {
-    setSelectedVehicle(vehicleName);
-    navigateTo("/contacto");
-  }, [navigateTo]);
-
-  const handleLogout = useCallback(async () => {
-    if (supabase) await supabase.auth.signOut();
-    setIsAuthenticated(false);
-  }, []);
-
+  const handleSelectVehicleFromCatalog = useCallback((vehicleName: string) => { setSelectedVehicle(vehicleName); navigateTo("/contacto"); }, [navigateTo]);
+  const handleLogout = useCallback(async () => { if (supabase) await supabase.auth.signOut(); setIsAuthenticated(false); }, []);
   const handleLoginSuccess = useCallback(() => setIsAuthenticated(true), []);
-
   if (currentPath === "/leads") {
-    if (isCheckingAuth) {
-      return <div className="min-h-screen bg-[#0A0A0A] flex items-center justify-center text-white"><div className="flex flex-col items-center space-y-3"><div className="w-6 h-6 border-2 border-white/20 border-t-[#C8102E] rounded-full animate-spin" /><span className="text-xs font-mono tracking-widest text-white/50 uppercase">Verificando credenciales...</span></div></div>;
-    }
+    if (isCheckingAuth) return <div className="min-h-screen bg-[#0A0A0A] flex items-center justify-center text-white"><div className="flex flex-col items-center space-y-3"><div className="w-6 h-6 border-2 border-white/20 border-t-[#C8102E] rounded-full animate-spin" /><span className="text-xs font-mono tracking-widest text-white/50 uppercase">Verificando credenciales...</span></div></div>;
     if (!isAuthenticated) return <AdminLogin onBackToHome={() => navigateTo("/")} onLoginSuccess={handleLoginSuccess} />;
     return <LeadsDashboard onBackToHome={() => navigateTo("/")} onLogout={handleLogout} />;
   }
-
   const legalType: LegalDocType = currentPath === "/aviso-legal" ? "legal" : currentPath === "/cookies" ? "cookies" : "privacy";
-
   return (
     <div className="min-h-screen flex flex-col bg-[#0A0A0A] text-white antialiased selection:bg-[#C8102E] selection:text-white">
-      <ScrollProgressBar />
-      <Header currentRoute={currentPath} onNavigate={navigateTo} onCtaClick={handleScrollToForm} />
+      <ScrollProgressBar /><Header currentRoute={currentPath} onNavigate={navigateTo} onCtaClick={handleScrollToForm} />
       <main className="flex-grow">
         {currentPath === "/servicio" && <ServicePage onCtaClick={handleScrollToForm} />}
         {currentPath === "/proceso" && <ProcessPage onCtaClick={handleScrollToForm} />}
@@ -165,18 +118,16 @@ export default function App() {
         {currentPath === "/nosotros" && <AboutPage onCtaClick={handleScrollToForm} />}
         {currentPath === "/contacto" && <ContactPage prefilledVehicle={selectedVehicle} />}
         {(currentPath === "/privacidad" || currentPath === "/aviso-legal" || currentPath === "/cookies") && <LegalPage type={legalType} onNavigateBack={() => navigateTo("/")} onSelectDoc={(t) => navigateTo(`/${t === "legal" ? "aviso-legal" : t}`)} />}
-        {currentPath === "/" && (
-          <>
-            <Hero onCtaClick={handleScrollToConversion} onProcessClick={() => navigateTo("/proceso")} />
-            <ShowroomVehicles onNavigateVehicles={() => navigateTo("/vehiculos")} onSelectVehicle={handleSelectVehicleFromCatalog} />
-            <ShowroomPositioning onNavigateService={() => navigateTo("/servicio")} />
-            <ShowroomWhyGermany onNavigateAdvantages={() => navigateTo("/importacion")} />
-            <ShowroomIntelligence onNavigateMethod={() => navigateTo("/servicio")} />
-            <ShowroomProcess onNavigateProcess={() => navigateTo("/proceso")} />
-            <ShowroomConversion />
-            <ShowroomClosing />
-          </>
-        )}
+        {currentPath === "/" && <>
+          <Hero onCtaClick={handleScrollToConversion} onProcessClick={() => navigateTo("/proceso")} />
+          <ShowroomVehicles onNavigateVehicles={() => navigateTo("/vehiculos")} onSelectVehicle={handleSelectVehicleFromCatalog} />
+          <ShowroomPositioning onNavigateService={() => navigateTo("/servicio")} />
+          <ShowroomWhyGermany onNavigateAdvantages={() => navigateTo("/importacion")} />
+          <ShowroomIntelligence onNavigateMethod={() => navigateTo("/servicio")} />
+          <ShowroomProcess onNavigateProcess={() => navigateTo("/proceso")} />
+          <ShowroomConversion />
+          <ShowroomClosing onCtaClick={handleScrollToConversion} />
+        </>}
       </main>
       <Footer onNavigate={navigateTo} onOpenLeadForm={handleScrollToForm} />
     </div>
