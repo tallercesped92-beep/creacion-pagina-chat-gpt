@@ -62,7 +62,6 @@ export const ServicePage: React.FC<ServicePageProps> = ({ onCtaClick }) => {
   return (
     <div className="pt-28 pb-24 bg-[#0A0A0A] text-white min-h-screen">
       <div className="max-w-7xl mx-auto px-6 sm:px-8">
-        {/* Page Breadcrumb & Header */}
         <div className="max-w-3xl mb-16 sm:mb-20">
           <div className="flex items-center space-x-3 mb-4">
             <span className="text-xs font-bold tracking-[0.25em] text-[#C8102E] uppercase font-display">
@@ -91,41 +90,63 @@ export const ServicePage: React.FC<ServicePageProps> = ({ onCtaClick }) => {
             </button>
           </div>
         </div>
+      </div>
 
-        {/* Modules Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mb-20">
-          {serviceModules.map((item, idx) => {
-            const Icon = item.icon;
-            return (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.45, delay: idx * 0.08 }}
-                className="p-8 bg-[#141414] border border-white/10 relative group hover:border-[#C8102E]/50 transition-colors"
-              >
-                <div className="w-12 h-12 rounded-sm bg-white/5 border border-white/10 flex items-center justify-center text-[#C8102E] mb-6 group-hover:bg-[#C8102E]/15 transition-colors">
-                  <Icon className="w-6 h-6" />
-                </div>
+      <section className="bg-[#F3F2EF] text-[#111111] py-20 sm:py-28 border-y border-[#E5E3DC]">
+        <div className="max-w-7xl mx-auto px-6 sm:px-8">
+          <div className="max-w-3xl mb-12 sm:mb-16">
+            <span className="text-xs font-bold tracking-[0.25em] text-[#C8102E] uppercase font-display">
+              CÓMO TRABAJAMOS
+            </span>
+            <h2 className="font-display text-3xl sm:text-5xl font-bold tracking-tight uppercase leading-[1.08] text-[#111111] mt-4">
+              SEIS FILTROS ANTES DE COMPRAR.
+            </h2>
+          </div>
 
-                <span className="text-[10px] font-mono tracking-widest uppercase text-[#C8102E] block mb-1">
-                  {item.subtitle}
-                </span>
+          <div className="divide-y divide-[#111111]/15 border-y border-[#111111]/15">
+            {serviceModules.map((item, idx) => {
+              const Icon = item.icon;
+              return (
+                <motion.article
+                  key={idx}
+                  initial={{ opacity: 0, y: 15 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-40px" }}
+                  transition={{ duration: 0.4, delay: idx * 0.04 }}
+                  className="grid grid-cols-[auto_1fr] sm:grid-cols-[80px_1fr_auto] gap-5 sm:gap-8 py-8 sm:py-10 items-start"
+                >
+                  <span className="font-display text-3xl sm:text-4xl font-bold text-[#C8102E]/80 leading-none">
+                    {(idx + 1).toString().padStart(2, "0")}
+                  </span>
 
-                <h2 className="font-display text-lg font-bold uppercase tracking-tight text-white mb-3">
-                  {item.title}
-                </h2>
+                  <div>
+                    <div className="flex items-center gap-3 mb-2">
+                      <Icon className="w-4 h-4 text-[#C8102E] flex-shrink-0" />
+                      <span className="text-[10px] font-mono tracking-widest uppercase text-[#6B7280]">
+                        {item.subtitle}
+                      </span>
+                    </div>
+                    <h3 className="font-display text-lg sm:text-xl font-bold uppercase tracking-tight text-[#111111] mb-3">
+                      {item.title}
+                    </h3>
+                    <p className="text-sm sm:text-base text-[#5B6068] font-light leading-relaxed max-w-3xl">
+                      {item.desc}
+                    </p>
+                  </div>
 
-                <p className="text-sm text-white/65 font-light leading-relaxed">
-                  {item.desc}
-                </p>
-              </motion.div>
-            );
-          })}
+                  <div className="hidden sm:flex items-center gap-2 text-[10px] font-mono uppercase tracking-wider text-[#6B7280] whitespace-nowrap">
+                    <CheckCircle className="w-4 h-4 text-[#C8102E]" />
+                    Verificado
+                  </div>
+                </motion.article>
+              );
+            })}
+          </div>
         </div>
+      </section>
 
-        {/* Honest Disclaimer Box */}
-        <div className="p-8 sm:p-10 bg-[#161616] border border-white/10 relative overflow-hidden mb-16">
+      <div className="max-w-7xl mx-auto px-6 sm:px-8 py-20 sm:py-24">
+        <div className="p-8 sm:p-10 bg-[#161616] border border-white/10 relative overflow-hidden">
           <div className="absolute top-0 left-0 bottom-0 w-1.5 bg-[#C8102E]" />
           <h2 className="font-display text-xl font-bold uppercase tracking-tight text-white mb-3">
             NUESTRO COMPROMISO DE INDEPENDENCIA
@@ -151,19 +172,11 @@ export const ServicePage: React.FC<ServicePageProps> = ({ onCtaClick }) => {
         </div>
       </div>
 
-      {/* Deep Customer Doubts & Solutions Module */}
       <CustomerPainPoints onCtaClick={onCtaClick} />
-
-      {/* Deep Market Intelligence (10 Dimensions) */}
       <MarketIntelligence onCtaClick={onCtaClick} />
-
-      {/* Why Germany & Advantages */}
       <Advantages />
-
-      {/* Frequently Asked Questions */}
       <FAQ />
 
-      {/* Final Conversion Callout */}
       <div className="max-w-7xl mx-auto px-6 sm:px-8 mt-20 text-center py-12 border-t border-white/10">
         <h2 className="font-display text-2xl sm:text-3xl font-bold uppercase tracking-tight text-white mb-4">
           ¿TIENES UN MODELO EN MENTE?
@@ -182,4 +195,3 @@ export const ServicePage: React.FC<ServicePageProps> = ({ onCtaClick }) => {
     </div>
   );
 };
-
