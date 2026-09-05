@@ -169,7 +169,7 @@ export const ServicePage: React.FC<ServicePageProps> = ({ onCtaClick }) => {
           ¿TIENES UN MODELO EN MENTE?
         </h2>
         <p className="text-sm sm:text-base text-white/60 font-light mb-8 max-w-xl mx-auto">
-          Cuéntanos qué vehículo estás buscando y realizamos una primera prospección de mercado gratuita sin ningún compromiso.
+          Cuéntanos qué vehículo estás buscando y realizamos una prospección de mercado orientada a localizar las unidades que encajan con tus criterios.
         </p>
         <button
           onClick={onCtaClick}

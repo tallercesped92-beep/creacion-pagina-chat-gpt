@@ -85,11 +85,16 @@ export const ProcessPage: React.FC<ProcessPageProps> = ({ onCtaClick }) => {
         </div>
 
         {/* Timeline Badge */}
-        <div className="mb-12 p-5 bg-[#141414] border border-white/10 flex items-center space-x-4 max-w-xl">
-          <Clock className="w-6 h-6 text-[#C8102E] flex-shrink-0" />
-          <div className="text-xs sm:text-sm text-white/80 font-light">
-            <span className="font-semibold text-white">Plazo medio estimado:</span>{" "}
-            Entre 15 y 25 días hábiles desde la aprobación de la unidad hasta la entrega con placas españolas definitivas.
+        <div className="mb-12 p-5 bg-[#141414] border border-white/10 flex items-start space-x-4 max-w-2xl">
+          <Clock className="w-6 h-6 text-[#C8102E] flex-shrink-0 mt-0.5" />
+          <div className="text-xs sm:text-sm text-white/80 font-light space-y-1">
+            <p>
+              <span className="font-semibold text-white">Plazo medio estimado:</span>{" "}
+              Entre 15 y 25 días hábiles desde la aprobación de la unidad hasta la entrega con placas españolas definitivas.
+            </p>
+            <p className="text-[11px] sm:text-xs text-white/50">
+              Los tiempos de cada etapa son orientativos. El plazo total puede variar según transporte, documentación, ITV y matriculación.
+            </p>
           </div>
         </div>
 

@@ -202,7 +202,7 @@ export const ImportPage: React.FC<ImportPageProps> = ({ onCtaClick }) => {
                 CALCULA TU CASO PARTICULAR
               </h3>
               <p className="text-xs sm:text-sm text-white/70 font-light leading-relaxed mb-6">
-                Cada motorización, año y nivel de emisiones genera un cálculo fiscal distinto. Nuestro equipo analiza la viabilidad y los números exactos de la unidad que te interesa de forma totalmente gratuita.
+                Cada motorización, año y nivel de emisiones genera un cálculo fiscal distinto. Nuestro equipo analiza la viabilidad y los números exactos de la unidad que te interesa antes de avanzar con la operación.
               </p>
             </div>
 

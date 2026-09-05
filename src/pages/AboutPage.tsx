@@ -90,7 +90,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onCtaClick }) => {
               ACOMPAÑAMIENTO REAL
             </h2>
             <p className="text-xs sm:text-sm text-white/65 font-light leading-relaxed">
-              Desde la primera consulta hasta la entrega con placas definitivas, cuentas con un interlocutor único y directo que resuelve cada duda, gestión aduanera, ITV y matriculación.
+              Desde la primera consulta hasta la entrega con placas definitivas, cuentas con un interlocutor único y directo que resuelve cada duda, gestión de documentación, ITV y matriculación.
             </p>
           </motion.div>
         </div>
