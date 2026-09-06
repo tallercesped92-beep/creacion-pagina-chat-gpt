@@ -28,9 +28,9 @@ export const ShowroomIntelligence: React.FC<ShowroomIntelligenceProps> = ({ onNa
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 mb-10 pt-6 border-t border-white/10">
               {methodPoints.map((point) => (
-                <div key={point.label} className="border-t border-white/15 pt-4">
-                  <span className="text-[10px] font-mono tracking-[0.18em] uppercase text-[#C8102E] block mb-2">{point.label}</span>
-                  <p className="text-xs text-[#F3F2EF]/65 font-light leading-relaxed">{point.text}</p>
+                <div key={point.label} className="border border-white/10 bg-white/[0.025] px-5 py-6 sm:px-6 sm:py-7 min-h-[150px] flex flex-col justify-center transition-all duration-300 hover:border-white/20 hover:bg-white/[0.04]">
+                  <span className="text-sm sm:text-base font-semibold tracking-[0.16em] uppercase text-[#C8102E] block mb-3">{point.label}</span>
+                  <p className="text-base sm:text-lg text-[#F3F2EF]/90 font-light leading-relaxed">{point.text}</p>
                 </div>
               ))}
             </div>
